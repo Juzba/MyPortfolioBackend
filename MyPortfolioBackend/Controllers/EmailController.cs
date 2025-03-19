@@ -6,18 +6,19 @@ namespace MyPortfolioBackend.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        private readonly EmailService _emailService;
+        //private readonly EmailService _emailService;
 
-        public EmailController()
-        {
-            _emailService = new EmailService();
-        }
+        //public EmailController()
+        //{
+        //    _emailService = new EmailService();
+        //}
 
         [HttpPost]
-        [Route("send")]
-        public IActionResult SendEmail([FromBody] EmailRequest emailRequest)
+        //[Route("send")]
+        public ActionResult<string> SendEmail([FromBody] EmailRequest emailRequest)
         {
-            _emailService.SendEmail(emailRequest.To, emailRequest.Subject, emailRequest.Message);
+            //zkouska
+            //_emailService.SendEmail(emailRequest.To, emailRequest.Subject, emailRequest.Message);
             return Ok(new { message = "Email sent successfully!" });
         }
     }
