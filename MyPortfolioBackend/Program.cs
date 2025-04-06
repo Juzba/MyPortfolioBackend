@@ -13,10 +13,21 @@ options.AddPolicy("AllowAll", builder =>
 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
 );
 
+
+
+
+
+
 var app = builder.Build();
 
 // Cors //
 app.UseCors("AllowAll");
+
+
+
+
+
+
 
 
 // Configure the HTTP request pipeline.
