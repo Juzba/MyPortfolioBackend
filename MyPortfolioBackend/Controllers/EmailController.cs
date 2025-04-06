@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyPortfolioBackend.Models;
+using MyPortfolioBackend.Services;
+using System.Threading.Tasks;
 
 namespace MyPortfolioBackend.Controllers
 {
@@ -6,28 +9,23 @@ namespace MyPortfolioBackend.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        //private readonly EmailService _emailService;
+        private readonly EmailService _emailService;
 
-        //public EmailController()
-        //{
-        //    _emailService = new EmailService();
-        //}
+        public EmailController(EmailService emailService)
+        {
+            _emailService = emailService;
+        }
 
         [HttpPost]
-        //[Route("send")]
-        public ActionResult<string> SendEmail([FromBody] EmailRequest emailRequest)
+        public async Task<IActionResult> SendEmail([FromBody] EmailMessage emailMessage)
         {
-            //zkouska
-            //_emailService.SendEmail(emailRequest.To, emailRequest.Subject, emailRequest.Message);
+            if (emailMessage == null)
+            {
+                return BadRequest();
+            }
+
+            await _emailService.SendEmailAsync(emailMessage);
             return Ok(new { message = "Email sent successfully!" });
         }
     }
-
-    public class EmailRequest
-    {
-        public string To { get; set; }
-        public string Subject { get; set; }
-        public string Message { get; set; }
-    }
 }
-

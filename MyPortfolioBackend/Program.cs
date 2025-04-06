@@ -1,6 +1,18 @@
+using MyPortfolioBackend;
+using MyPortfolioBackend.Services;
+using Microsoft.Extensions.DependencyInjection;  
+using Microsoft.AspNetCore.Builder;  
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+
+// Registrace služby EmailService  
+builder.Services.AddSingleton<EmailService>();
+
+
+
+//////////////
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
