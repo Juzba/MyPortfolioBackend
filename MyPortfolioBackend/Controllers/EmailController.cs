@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyPortfolioBackend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("email/[controller]")]
     [ApiController]
     public class EmailController : ControllerBase
     {
