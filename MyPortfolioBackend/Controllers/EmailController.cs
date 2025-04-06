@@ -1,31 +1,53 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyPortfolioBackend.Models;
-using MyPortfolioBackend.Services;
-using System.Threading.Tasks;
+﻿using MailKit.Security;
+using Microsoft.AspNetCore.Mvc;
+using MimeKit;
+using MailKit.Net.Smtp;
 
-namespace MyPortfolioBackend.Controllers
+
+namespace EmailApi.Controllers
 {
-    [Route("email/[controller]")]
+
+
     [ApiController]
+    [Route("[controller]")]
     public class EmailController : ControllerBase
     {
-        private readonly EmailService _emailService;
 
-        public EmailController(EmailService emailService)
-        {
-            _emailService = emailService;
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> SendEmail([FromBody] EmailMessage emailMessage)
+        [HttpPost("send")]
+
+        public IActionResult SendEmail([FromBody] EmailRequest emailRequest)
         {
-            if (emailMessage == null)
+
+
+            try
             {
-                return BadRequest();
-            }
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(emailRequest.Name, "Juzba88@seznam.cz"));
+                message.To.Add(new MailboxAddress("Juzba@88gmail.com", "Juzba88@gmail.com"));
+                message.Subject = "!!! Portfolio Kontaktní formulář !!!";
+                message.Body = new TextPart("plain") { Text = emailRequest.Message };
 
-            await _emailService.SendEmailAsync(emailMessage);
-            return Ok(new { message = "Email sent successfully!" });
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.seznam.cz", 587, SecureSocketOptions.StartTls); // Použij své SMTP nastavení  
+                    client.Authenticate("Juzba88@seznam.cz", "nebermiheslo.cz");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+
+                return Ok("E-mail byl úspěšně odeslán.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Chyba při odesílání e-mailu: {ex.Message}");
+            }
         }
     }
+}
+
+public class EmailRequest
+{
+    public required string Name { get; set; }
+    public required string Message { get; set; }
 }

@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Registrace služby EmailService  
-builder.Services.AddSingleton<EmailService>();
+//builder.Services.AddSingleton<EmailService>();
 
 
 
