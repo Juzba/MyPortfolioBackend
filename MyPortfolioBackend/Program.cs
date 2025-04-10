@@ -1,30 +1,26 @@
-
-using Microsoft.Extensions.DependencyInjection;  
-using Microsoft.AspNetCore.Builder;  
-
 var builder = WebApplication.CreateBuilder(args);
 
 
 //////////////
 ///
 // Pøidání CORS služby  
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigins",
-        builder =>
-        {
-            builder.AllowAnyOrigin() // Pøidejte zde vaše adresy  
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
-        });
-});
-
-
-// Cors //
 //builder.Services.AddCors(options =>
-//options.AddPolicy("AllowAllOrigins", builder =>
-//builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
-//);
+//{
+//    options.AddPolicy("AllowSpecificOrigins",
+//        builder =>
+//        {
+//            builder.AllowAnyOrigin() // Pøidejte zde vaše adresy  
+//                   .AllowAnyHeader()
+//                   .AllowAnyMethod();
+//        });
+//});
+
+
+//Cors //
+builder.Services.AddCors(options =>
+options.AddPolicy("AllowAllOrigins", builder =>
+builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
+);
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -38,7 +34,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Cors //
-app.UseCors("AllowSpecificOrigins");
+app.UseCors("AllowAllOrigins");
 
 
 
