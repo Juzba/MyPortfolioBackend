@@ -13,7 +13,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigins",
         builder =>
         {
-            builder.WithOrigins("http://localhost:5173", "https://portfolio-backend-juzba-h7dtdva0fvadach3.westeurope-01.azurewebsites.net") // Pøidejte zde vaše adresy  
+            builder.AllowAnyOrigin() // Pøidejte zde vaše adresy  
                    .AllowAnyHeader()
                    .AllowAnyMethod();
         });
