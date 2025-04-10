@@ -5,20 +5,26 @@ using Microsoft.AspNetCore.Builder;
 var builder = WebApplication.CreateBuilder(args);
 
 
-
-// Registrace služby EmailService  
-//builder.Services.AddSingleton<EmailService>();
-
-
-
 //////////////
+///
+// Pøidání CORS služby  
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5173", "https://portfolio-backend-juzba-h7dtdva0fvadach3.westeurope-01.azurewebsites.net") // Pøidejte zde vaše adresy  
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 
 
 // Cors //
-builder.Services.AddCors(options =>
-options.AddPolicy("AllowAllOrigins", builder =>
-builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
-);
+//builder.Services.AddCors(options =>
+//options.AddPolicy("AllowAllOrigins", builder =>
+//builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
+//);
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,7 +38,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Cors //
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowSpecificOrigins");
 
 
 
