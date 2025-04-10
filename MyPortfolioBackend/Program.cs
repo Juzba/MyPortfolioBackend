@@ -1,5 +1,4 @@
-using MyPortfolioBackend;
-using MyPortfolioBackend.Services;
+
 using Microsoft.Extensions.DependencyInjection;  
 using Microsoft.AspNetCore.Builder;  
 
