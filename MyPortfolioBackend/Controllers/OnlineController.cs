@@ -14,7 +14,7 @@ namespace MyPortfolioBackend.Controllers
 
         public IActionResult Get()
         {
-            return Ok("Server jede ultra OK!");
+            return Ok("Server je online!");
         }
     }
 }
