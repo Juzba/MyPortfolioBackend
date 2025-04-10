@@ -5,7 +5,7 @@ namespace MyPortfolioBackend.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class OnlineController : Controller
+    public class OnlineController : ControllerBase
     {
 
 
