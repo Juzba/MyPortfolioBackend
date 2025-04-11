@@ -1,21 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
 
-//////////////
-///
-// Pøidání CORS služby  
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowSpecificOrigins",
-//        builder =>
-//        {
-//            builder.AllowAnyOrigin() // Pøidejte zde vaše adresy  
-//                   .AllowAnyHeader()
-//                   .AllowAnyMethod();
-//        });
-//});
-
-
 // Pøidání CORS služby  
 builder.Services.AddCors(options =>
 {
@@ -42,12 +27,6 @@ var app = builder.Build();
 
 // Cors //
 app.UseCors("AllowSpecificOrigins");
-
-
-
-
-
-
 
 
 // Configure the HTTP request pipeline.
